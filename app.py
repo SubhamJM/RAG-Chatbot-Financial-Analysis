@@ -31,7 +31,7 @@ def init_agent():
     tavily_tool = TavilySearchResults(max_results=3)
     tools = [retriever_tool, tavily_tool]
     
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+    llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite")
     memory = MemorySaver()
     
     return create_react_agent(llm, tools, checkpointer=memory)
