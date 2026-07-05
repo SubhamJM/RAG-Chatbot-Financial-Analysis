@@ -21,7 +21,7 @@ st.caption("Ask questions about financial information of Apple and Nvidia.")
 @st.cache_resource
 def init_agent():
     embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectorstore = Chroma(persist_directory="./chroma_db", embedding_function=embedding)
+    vectorstore = Chroma(persist_directory="./vector_store", embedding_function=embedding)
     retriever = vectorstore.as_retriever()
     retriever_tool = create_retriever_tool(
         retriever,
@@ -31,7 +31,7 @@ def init_agent():
     tavily_tool = TavilySearchResults(max_results=3)
     tools = [retriever_tool, tavily_tool]
     
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
     memory = MemorySaver()
     
     return create_react_agent(llm, tools, checkpointer=memory)
@@ -62,7 +62,7 @@ if user_input := st.chat_input("Type your message here..."):
             initial_state = {"messages": [("user", user_input)]}
             response = agent_executor.invoke(initial_state, config=config)
             
-            final_reply = response["messages"][-1].content
+            final_reply = response["messages"][-1].content[0]["text"]
             
             st.write(final_reply)
             

@@ -20,7 +20,7 @@ embedding = HuggingFaceEmbeddings(
 vectorstore = Chroma.from_documents(
     documents=chunks,
     embedding=embedding,
-    persist_directory="./chroma_db",
+    persist_directory="./vector_store",
 )
 
 print(f"Stored {len(chunks)} chunks in the vector store.")
