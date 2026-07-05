@@ -14,9 +14,9 @@ load_dotenv(override=True)
 os.environ["GOOGLE_API_KEY"] = os.environ.get("GEMINI_API_KEY", "")
 os.environ["TAVILY_API_KEY"] = os.environ.get("TAVILY_API_KEY", "")
 
-st.set_page_config(page_title="Meditation AI Guide", page_icon="🧘", layout="centered")
-st.title("🧘 Meditation AI Assistant")
-st.caption("Ask questions about meditation techniques from your PDF or search the web.")
+st.set_page_config(page_title="Financial Analysis Assistant", page_icon="💰", layout="centered")
+st.title("Financial Analysis Assistant")
+st.caption("Ask questions about financial information of Apple and Nvidia.")
 
 @st.cache_resource
 def init_agent():
@@ -25,8 +25,8 @@ def init_agent():
     retriever = vectorstore.as_retriever()
     retriever_tool = create_retriever_tool(
         retriever,
-        name="meditation_pdf_search",
-        description="Search this tool first for any questions regarding meditation techniques, posture, and breathing exercises."
+        name="Financial_information_search_for_apple_and_nvidia",
+        description="Search this tool first for any questions regarding Financial information of Apple and Nvidia."
     )
     tavily_tool = TavilySearchResults(max_results=3)
     tools = [retriever_tool, tavily_tool]
@@ -39,7 +39,7 @@ def init_agent():
 agent_executor = init_agent()
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "Hello! I can help you explore meditation practices. What's on your mind today?"}
+        {"role": "assistant", "content": "Hello! I can help you with financial analysis of Apple and Nvidia."}
     ]
 
 if "thread_id" not in st.session_state:
