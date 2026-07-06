@@ -3,7 +3,6 @@ from langchain_huggingface import HuggingFaceEmbeddings
 import streamlit as st
 import os
 from langchain_core.tools import create_retriever_tool
-from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
@@ -28,8 +27,7 @@ def init_agent():
         name="Financial_information_search_for_apple_and_nvidia",
         description="Search this tool first for any questions regarding Financial information of Apple and Nvidia."
     )
-    tavily_tool = TavilySearchResults(max_results=3)
-    tools = [retriever_tool, tavily_tool]
+    tools = [retriever_tool]
     
     llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite")
     memory = MemorySaver()
