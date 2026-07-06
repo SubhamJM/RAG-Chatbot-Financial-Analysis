@@ -13,7 +13,7 @@ load_dotenv(override=True)
 os.environ["GOOGLE_API_KEY"] = os.environ.get("GEMINI_API_KEY", "")
 os.environ["TAVILY_API_KEY"] = os.environ.get("TAVILY_API_KEY", "")
 
-st.set_page_config(page_title="Code of Conduct Assistant", page_icon="💰", layout="centered")
+st.set_page_config(page_title="Code of Conduct Assistant", page_icon="🤖", layout="centered")
 st.title("Code of Conduct Assistant")
 st.caption("Ask questions about Code of Conduct of Apple and Google.")
 
